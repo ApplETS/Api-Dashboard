@@ -19,8 +19,18 @@ class ApplETSTheme {
   static final lightTheme = ThemeData.light().copyWith(
       primaryColor: violet,
       visualDensity: VisualDensity.adaptivePlatformDensity,
-      buttonColor: secondaryBlue,
+      buttonTheme: ThemeData.light().buttonTheme.copyWith(
+        buttonColor: secondaryBlue,
+        textTheme: ButtonTextTheme.primary
+      ),
+      textTheme: ThemeData.light().textTheme.copyWith(
+        headline4: ThemeData.light().textTheme.headline4.copyWith(
+          color: Colors.black
+        )
+      ),
       floatingActionButtonTheme: ThemeData.light()
           .floatingActionButtonTheme
           .copyWith(backgroundColor: secondaryBlue));
+
+  static ThemeData get currentTheme => lightTheme;
 }
