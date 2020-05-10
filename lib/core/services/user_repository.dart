@@ -1,13 +1,21 @@
 // FLUTTER / DART / THIRD-PARTIES
-import 'package:api_dashboard/core/models/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+// MODEL
+import 'package:api_dashboard/core/models/user.dart';
+
+// OTHERS
+import 'package:api_dashboard/core/services/analytics_service.dart';
+import 'package:api_dashboard/locator.dart';
 
 class UserRepository {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   final CollectionReference _usersCollection = Firestore.instance.collection('users');
+
+  final AnalyticsService _analyticsService = locator<AnalyticsService>();
 
   User _user;
   User get user => _user;
@@ -23,6 +31,7 @@ class UserRepository {
       var authResult = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
 
       await _fetchUserProfile(authResult.user.uid);
+      _analyticsService.logSignIn(uid: authResult.user.uid, role: _user.role.toString());
 
       return _user != null;
     } catch (e) {
