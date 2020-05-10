@@ -1,0 +1,11 @@
+{
+  "appTitle": "App|ETS Tableau de bord",
+  "signInTitle": "Tableau de bord",
+  "email": "Email",
+  "password": "Mot de passe",
+  "signIn": "Connexion",
+  "invalidEmail": "S'il vous plaît, entrez un email valide.",
+  "enterEmailError": "S'il vous plaît entrez votre email.",
+  "enterPasswordError": "S'il vous plaît entrez votre mot de passe.",
+  "oups": "Une erreur est survenue, veuillez réessayer plus tard."
+}

@@ -8,6 +8,7 @@ import 'package:api_dashboard/core/view_models/sign_in_view_model.dart';
 import 'package:api_dashboard/ui/utils/theme.dart';
 import 'package:api_dashboard/ui/utils/util.dart';
 import 'package:api_dashboard/ui/utils/base_view.dart';
+import 'package:api_dashboard/generated/l10n.dart';
 
 class SignInView extends StatefulWidget {
   @override
@@ -38,7 +39,7 @@ class _SignInViewState extends State<SignInView> {
                         child: Image.asset('assets/images/black_logo.png'),
                       ),
                       verticalSpaceMedium,
-                      Text("Dashboard",
+                      Text(S.of(context).signInTitle,
                           style: Theme.of(context).textTheme.headline4),
                       verticalSpaceMedium,
                       model.error != null
@@ -57,10 +58,10 @@ class _SignInViewState extends State<SignInView> {
                               TextFormField(
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
-                                  labelText: 'Email',
+                                  labelText: S.of(context).email,
                                 ),
                                 autofocus: true,
-                                validator: model.emailValidator,
+                                validator: (value) => _loadMessage(model.emailValidator(value)),
                                 enabled: !model.isBusy,
                               ),
                               verticalSpaceMedium,
@@ -68,10 +69,10 @@ class _SignInViewState extends State<SignInView> {
                                   obscureText: true,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(),
-                                    labelText: 'Password',
+                                    labelText: S.of(context).password,
                                   ),
                                   autofocus: true,
-                                  validator: model.passwordValidator,
+                                  validator: (value) => _loadMessage(model.passwordValidator(value)),
                                   enabled: !model.isBusy),
                               verticalSpaceMedium,
                               Row(
@@ -79,7 +80,7 @@ class _SignInViewState extends State<SignInView> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   RaisedButton(
-                                    child: Text("Sign in"),
+                                    child: Text(S.of(context).signIn),
                                     onPressed: model.isSubmitEnabled
                                         ? model.onSubmitPressed
                                         : null,
@@ -110,5 +111,22 @@ class _SignInViewState extends State<SignInView> {
         ),
       ),
     );
+  }
+
+  String _loadMessage(String value) {
+    if(value == null)
+      return null;
+    switch(value) {
+      case 'invalidEmail':
+        return S.of(context).invalidEmail;
+      case 'enterEmailError':
+        return S.of(context).enterEmailError;
+      case 'enterPasswordError':
+        return S.of(context).enterPasswordError;
+      case 'oups':
+        return S.of(context).oups;
+      default:
+        return "Missing translation for $value";
+    }
   }
 }

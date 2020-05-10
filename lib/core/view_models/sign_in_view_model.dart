@@ -30,10 +30,10 @@ class SignInViewModel extends BaseViewModel {
 
     if (value.length == 0) {
       _email = null;
-      return 'Please enter your email.';
+      return 'enterEmailError';
     } else if (!regExp.hasMatch(value)) {
       _email = null;
-      return 'Please enter a valid email.';
+      return 'invalidEmail';
     }
 
     _email = value;
@@ -43,7 +43,7 @@ class SignInViewModel extends BaseViewModel {
   String passwordValidator(String value) {
     if (value.length == 0) {
       _password = null;
-      return 'Please enter your password.';
+      return 'enterPasswordError';
     }
     _password = value;
     return null;
@@ -52,7 +52,11 @@ class SignInViewModel extends BaseViewModel {
   onSubmitPressed() async {
     setBusy(true);
     var result = await userRepository.signInWithEmail(email: _email, password: _password);
-    if(result)
+    if(result is String)
+      _errorMessage = result;
+    else if(!result)
+      _errorMessage = "oups";
+    else if(result)
       navigationService.navigateTo(RouterPaths.HOME);
     setBusy(false);
   }
