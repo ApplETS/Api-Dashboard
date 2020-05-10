@@ -1,17 +1,20 @@
 // FLUTTER / DART / THIRD-PARTIES
-import 'package:api_dashboard/core/constants/router_paths.dart';
 import 'package:flutter/material.dart';
 
 // SERVICES
 import 'package:api_dashboard/core/services/navigation_service.dart';
+import 'package:api_dashboard/core/services/user_repository.dart';
 import 'package:api_dashboard/locator.dart';
 
 // OTHER
 import 'package:api_dashboard/core/view_models/base_view_model.dart';
+import 'package:api_dashboard/core/constants/router_paths.dart';
 
 class SignInViewModel extends BaseViewModel {
   final formKey = GlobalKey<FormState>();
+
   final navigationService = locator<NavigationService>();
+  final userRepository = locator<UserRepository>();
 
   String _email;
   String _password;
@@ -43,8 +46,12 @@ class SignInViewModel extends BaseViewModel {
     return null;
   }
 
-  onSubmitPressed() {
-    navigationService.navigateTo(RouterPaths.HOME);
+  onSubmitPressed() async {
+    setBusy(true);
+    var result = await userRepository.signInWithEmail(email: _email, password: _password);
+    if(result)
+      navigationService.navigateTo(RouterPaths.HOME);
+    setBusy(false);
   }
 
   onForgotPasswordPressed() {}
