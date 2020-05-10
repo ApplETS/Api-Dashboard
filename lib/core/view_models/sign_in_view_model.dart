@@ -21,6 +21,9 @@ class SignInViewModel extends BaseViewModel {
 
   bool get isSubmitEnabled => _email != null && _password != null;
 
+  String _errorMessage;
+  String get error => _errorMessage;
+
   String emailValidator(String value) {
     RegExp regExp =
         RegExp(r'([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})');

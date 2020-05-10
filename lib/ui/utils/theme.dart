@@ -12,9 +12,11 @@ class ApplETSTheme {
   static const secondaryDarkBlue = Color(0xff3d88eb);
 
   /// Logo colors
-  static const Color lightBlue = Color(0xff0f9bd8);
+  static const lightBlue = Color(0xff0f9bd8);
   static const green = Color(0xff96bf26);
   static const grey = Color(0xffb5b5b5);
+
+  static const error = Color(0xffd32f2f);
 
   static final lightTheme = ThemeData.light().copyWith(
       primaryColor: violet,

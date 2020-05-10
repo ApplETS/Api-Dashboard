@@ -41,6 +41,11 @@ class _SignInViewState extends State<SignInView> {
                       Text("Dashboard",
                           style: Theme.of(context).textTheme.headline4),
                       verticalSpaceMedium,
+                      model.error != null
+                          ? Text(model.error,
+                              style: TextStyle(color: ApplETSTheme.error))
+                          : Container(width: 0, height: 0),
+                      verticalSpaceSmall,
                       Container(
                         width: 400.0,
                         child: Form(
@@ -91,8 +96,9 @@ class _SignInViewState extends State<SignInView> {
                 model.isBusy
                     ? Container(
                         width: 430,
-                        height: 436,
-                        decoration: BoxDecoration(color: Colors.black12.withOpacity(0.5)),
+                        height: 446,
+                        decoration: BoxDecoration(
+                            color: Colors.black12.withOpacity(0.5)),
                         child: Center(child: CircularProgressIndicator()))
                     : Container(
                         height: 0,
