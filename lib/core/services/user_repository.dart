@@ -44,7 +44,7 @@ class UserRepository {
       return _user != null;
     } catch (e) {
       print(e);
-      return e.message;
+      return e.code;
     }
   }
 }
