@@ -17,10 +17,14 @@ Currently, the APIs available are the following:
 ### Running the project in local
 - Enable web support: follow the instructions on the [Flutter site](https://flutter.dev/web)
 - Get the packages: `flutter packages get`
+- Generate the l10n classes: `flutter pub run intl_utils:generate`
 - To run the application, use the following command: `flutter run -d chrome`
 
 ### Architecture
 
 TODO
+
+## Useful tips
+ - Install the [Intellij](https://plugins.jetbrains.com/plugin/13666-flutter-intl) / [VS Code](https://marketplace.visualstudio.com/items?itemName=localizely.flutter-intl) plugin: Flutter Intl to automatically generate l10n files.
 
 
