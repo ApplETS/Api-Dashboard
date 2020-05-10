@@ -7,5 +7,6 @@
   "invalidEmail": "Please enter a valid email.",
   "enterEmailError": "Please enter your email.",
   "enterPasswordError": "Please enter your password.",
+  "userNotFound": "We didn't found any account associate with this email/password.",
   "oups": "Something went wrong, please try another time."
 }

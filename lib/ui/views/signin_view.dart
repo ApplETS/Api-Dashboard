@@ -43,7 +43,7 @@ class _SignInViewState extends State<SignInView> {
                           style: Theme.of(context).textTheme.headline4),
                       verticalSpaceMedium,
                       model.error != null
-                          ? Text(model.error,
+                          ? Text(_loadMessage(model.error),
                               style: TextStyle(color: ApplETSTheme.error))
                           : Container(width: 0, height: 0),
                       verticalSpaceSmall,
@@ -125,6 +125,8 @@ class _SignInViewState extends State<SignInView> {
         return S.of(context).enterPasswordError;
       case 'oups':
         return S.of(context).oups;
+      case 'userNotFound':
+        return S.of(context).userNotFound;
       default:
         return "Missing translation for $value";
     }

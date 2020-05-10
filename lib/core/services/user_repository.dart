@@ -20,14 +20,13 @@ class UserRepository {
   ///  - false if something wrong happened but we were not able to have a explicit error
   Future signInWithEmail({@required String email, @required String password}) async {
     try {
-      print("here");
       var authResult = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
 
       await _fetchUserProfile(authResult.user.uid);
 
       return _user != null;
     } catch (e) {
-      return e.message;
+      return e.code;
     }
   }
 

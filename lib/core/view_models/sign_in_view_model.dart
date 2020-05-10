@@ -52,8 +52,8 @@ class SignInViewModel extends BaseViewModel {
   onSubmitPressed() async {
     setBusy(true);
     var result = await userRepository.signInWithEmail(email: _email, password: _password);
-    if(result is String)
-      _errorMessage = result;
+    if(result == "auth/user-not-found")
+      _errorMessage = "userNotFound";
     else if(!result)
       _errorMessage = "oups";
     else if(result)
