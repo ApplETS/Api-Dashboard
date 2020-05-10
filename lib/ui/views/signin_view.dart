@@ -33,10 +33,13 @@ class _SignInViewState extends State<SignInView> {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      SizedBox(
-                        width: 200,
-                        height: 100,
-                        child: Image.asset('assets/images/black_logo.png'),
+                      Hero(
+                        tag: 'logo',
+                        child: SizedBox(
+                          width: 200,
+                          height: 100,
+                          child: Image.asset('assets/images/black_logo.png'),
+                        ),
                       ),
                       verticalSpaceMedium,
                       Text(S.of(context).signInTitle,

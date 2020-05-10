@@ -57,7 +57,7 @@ class SignInViewModel extends BaseViewModel {
     else if(!result)
       _errorMessage = "oups";
     else if(result)
-      navigationService.navigateTo(RouterPaths.HOME);
+      navigationService.navigateTo(RouterPaths.DASHBOARD);
     setBusy(false);
   }
 

@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       title: 'App|ETS Dashboard',
       theme: ApplETSTheme.lightTheme,
       navigatorKey: locator<NavigationService>().navigationKey,
-      initialRoute: RouterPaths.SIGN_IN,
+      initialRoute: RouterPaths.START_UP,
       onGenerateRoute: Router.generateRoute,
       localizationsDelegates: [
         S.delegate,

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 // VIEWS
+import 'package:api_dashboard/ui/views/startup_view.dart';
 import 'package:api_dashboard/ui/views/signin_view.dart';
 
 // OTHERS
@@ -16,7 +17,11 @@ class Router {
     // log manual because FirebaseAnalytics for web doesn't support yet the automatic log.
     analyticsService.logNavigateTo(routeSettings.name);
     switch (routeSettings.name) {
-      case RouterPaths.HOME:
+      case RouterPaths.START_UP:
+        return MaterialPageRoute(
+          builder: (_) => StartupView()
+        );
+      case RouterPaths.DASHBOARD:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
             body: Center(child: Text("Home view")),

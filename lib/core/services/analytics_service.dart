@@ -27,4 +27,9 @@ class AnalyticsService {
     _analytics.setUserProperties({'ROLE': role});
     _analytics.logEvent('sign_in', {'user signed in': uid});
   }
+
+  /// Report a event to Firebase
+  Future logEvent({String name, dynamic value}) {
+    _analytics.logEvent(name, {name: value});
+  }
 }

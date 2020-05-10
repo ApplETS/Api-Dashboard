@@ -56,4 +56,17 @@ class UserRepository {
       return e.code;
     }
   }
+
+  /// Check if there is a user signed
+  Future<bool> isUserSignedIn() async {
+    var user = await _firebaseAuth.currentUser();
+    if (user == null) {
+      user = await FirebaseAuth.instance.onAuthStateChanged.first;
+      if(user != null) {
+        await _fetchUserProfile(user.uid);
+        _analyticsService.logSignIn(uid: _user.uid, role: _user.role.toString());
+      }
+    }
+    return user != null;
+  }
 }
