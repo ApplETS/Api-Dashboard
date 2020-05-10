@@ -21,70 +21,84 @@ class _SignInViewState extends State<SignInView> {
       model: SignInViewModel(),
       builder: (context, model, child) => Scaffold(
         backgroundColor: ApplETSTheme.violet,
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-        ),
         body: Center(
           child: Card(
             elevation: 0,
-            child: Padding(
-              padding: EdgeInsets.all(15),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(
-                    width: 200,
-                    height: 100,
-                    child: Image.asset('assets/images/black_logo.png'),
-                  ),
-                  verticalSpaceMedium,
-                  Text("Dashboard", style: Theme.of(context).textTheme.headline4),
-                  verticalSpaceMedium,
-                  Container(
-                    width: 400.0,
-                    child: Form(
-                      key: model.formKey,
-                      onChanged: () => setState(() => model.formKey.currentState.validate()),
-                      child: Column(
-                        children: <Widget>[
-                          TextFormField(
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Email',
-                            ),
-                            autofocus: true,
-                            validator: model.emailValidator,
-                          ),
-                          verticalSpaceMedium,
-                          TextFormField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: 'Password',
-                            ),
-                            autofocus: true,
-                            validator: model.passwordValidator,
-                          ),
-                          verticalSpaceMedium,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.center,
+            child: Stack(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(15),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        width: 200,
+                        height: 100,
+                        child: Image.asset('assets/images/black_logo.png'),
+                      ),
+                      verticalSpaceMedium,
+                      Text("Dashboard",
+                          style: Theme.of(context).textTheme.headline4),
+                      verticalSpaceMedium,
+                      Container(
+                        width: 400.0,
+                        child: Form(
+                          key: model.formKey,
+                          onChanged: () => setState(
+                              () => model.formKey.currentState.validate()),
+                          child: Column(
                             children: <Widget>[
-                              RaisedButton(
-                                child: Text("Sign in"),
-                                onPressed: model.isSubmitEnabled ? model.onSubmitPressed:null,
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  labelText: 'Email',
+                                ),
+                                autofocus: true,
+                                validator: model.emailValidator,
+                                enabled: !model.isBusy,
+                              ),
+                              verticalSpaceMedium,
+                              TextFormField(
+                                  obscureText: true,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Password',
+                                  ),
+                                  autofocus: true,
+                                  validator: model.passwordValidator,
+                                  enabled: !model.isBusy),
+                              verticalSpaceMedium,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  RaisedButton(
+                                    child: Text("Sign in"),
+                                    onPressed: model.isSubmitEnabled
+                                        ? model.onSubmitPressed
+                                        : null,
+                                  )
+                                ],
                               )
                             ],
-                          )
-                        ],
+                          ),
+                        ),
                       ),
-                    ),
-                  )
-                ],
-              ),
+                    ],
+                  ),
+                ),
+                model.isBusy
+                    ? Container(
+                        width: 430,
+                        height: 436,
+                        decoration: BoxDecoration(color: Colors.black12.withOpacity(0.5)),
+                        child: Center(child: CircularProgressIndicator()))
+                    : Container(
+                        height: 0,
+                        width: 0,
+                      )
+              ],
             ),
           ),
         ),
